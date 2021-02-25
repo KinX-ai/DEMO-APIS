@@ -87,6 +87,23 @@ app.get('/gai', async function (req, res) {
    console.log('/gai',req.ip)
    res.end(JSON.stringify(response));
 })
+app.get('/sim/:text', function (req, res) {
+  var request = require('request')
+  res.writeHead(200, {'Content-Type': 'application/json'})
+  var request = require('request');
+var options = {
+  'method': 'GET',
+  'url': `https://api.simsimi.net/v1/?key=API-blP4EedaRusH95y1-NWFLKDE7teC6PT84&text=${encodeURI(req.params.text)}&cf=false`,
+  'headers': {
+    'Cookie': '__cfduid=d8d367ccb2fc7b5ce3b19e20201bcc8f71614227927; PHPSESSID=mvnf3crdcurvlocujcknj0vud1'
+  }
+};
+request(options, function (error, rp) {
+  if (error) throw new Error(error);
+ var response = {"data":`${JSON.parse(rp.body).msg}`,"author":"Mai Huy Bảo, Nguyễn Thế Nam, NH Tiến Lâm, Đặng Văn Hùng","contact":"https://www.facebook.com/JustOnly.MaiHuyBao.Unofficial, https://www.facebook.com/NNam13, https://www.facebook.com/tienlam.nh.9, https://www.facebook.com/hungchodz99","Homepage":"berver.tech"}
+   console.log('/sim/',req.params.text,rp.body.msg,req.ip);
+   res.end(JSON.stringify(response));});
+})
 var server = app.listen(app.get("port"), function () {
 
   var host = server.address().address
