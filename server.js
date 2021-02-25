@@ -8,11 +8,12 @@ var cosplay = JSON.parse(fs.readFileSync("./cosplay.json","utf-8"));
 var meme = JSON.parse(fs.readFileSync("./meme.json","utf-8"));
 var jimmy = JSON.parse(fs.readFileSync("./jimmy.json","utf-8"));
 var duckbo = JSON.parse(fs.readFileSync("./duckbo.json","utf-8"));
+var gai = JSON.parse(fs.readFileSync("./gai.json","utf-8"));
 app.set("port", process.env.PORT || 4000);
 
 app.get('/', function (req, res) {
    res.writeHead(200, {'Content-Type': 'application/json'});
-   var response = {"data":"😏","author":"Mai Huy Bảo, Nguyễn Thế Nam, NH Tiến Lâm, Đặng Văn Hùng","contact":"https://www.facebook.com/JustOnly.MaiHuyBao.Unofficial, https://www.facebook.com/NNam13, https://www.facebook.com/tienlam.nh.9, https://www.facebook.com/hungchodz99","Homepage":"berver.tech"}
+   var response = {"data":"Bảo nói với bạn rằng :Nhìn cái beep","author":"Mai Huy Bảo, Nguyễn Thế Nam, NH Tiến Lâm, Đặng Văn Hùng","contact":"https://www.facebook.com/JustOnly.MaiHuyBao.Unofficial, https://www.facebook.com/NNam13, https://www.facebook.com/tienlam.nh.9, https://www.facebook.com/hungchodz99","Homepage":"berver.tech"}
    console.log('/',req.ip);
    res.end(JSON.stringify(response));
 })
@@ -75,6 +76,15 @@ app.get('/duckbo', async function (req, res) {
    res.writeHead(200, {'Content-Type': 'application/json'});
    var response = {"data":`${duckborq}`,"author":"Mai Huy Bảo, Nguyễn Thế Nam, NH Tiến Lâm, Đặng Văn Hùng","contact":"https://www.facebook.com/JustOnly.MaiHuyBao.Unofficial, https://www.facebook.com/NNam13, https://www.facebook.com/tienlam.nh.9, https://www.facebook.com/hungchodz99","Homepage":"berver.tech"}
    console.log('/duckbo',req.ip)
+   res.end(JSON.stringify(response));
+})
+app.get('/gai', async function (req, res) {
+  var lenght = Number(gai.lenght);
+  var random = await Math.floor(Math.random() * lenght)
+  var gairq = await gai.data[String(random)]
+   res.writeHead(200, {'Content-Type': 'application/json'});
+   var response = {"data":`${gairq}`,"author":"Mai Huy Bảo, Nguyễn Thế Nam, NH Tiến Lâm, Đặng Văn Hùng","contact":"https://www.facebook.com/JustOnly.MaiHuyBao.Unofficial, https://www.facebook.com/NNam13, https://www.facebook.com/tienlam.nh.9, https://www.facebook.com/hungchodz99","Homepage":"berver.tech"}
+   console.log('/gai',req.ip)
    res.end(JSON.stringify(response));
 })
 var server = app.listen(app.get("port"), function () {
