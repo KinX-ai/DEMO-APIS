@@ -104,6 +104,22 @@ request(options, function (error, rp) {
    console.log('/sim/',req.params.text,rp.body.msg,req.ip);
    res.end(JSON.stringify(response));});
 })
+app.get('/simteach/:hoi/:dap', function (req, res) {
+  res.writeHead(200, {'Content-Type': 'application/json'})
+  var request = require('request');
+var options = {
+  'method': 'GET',
+  'url': `https://api.simsimi.net/v1/save.php?key=API-blP4EedaRusH95y1-NWFLKDE7teC6PT84&hoi=${encodeURI(req.params.hoi)}&dap=${encodeURI(req.params.dap)}&author=BerVer`,
+  'headers': {
+    'Cookie': '__cfduid=d8d367ccb2fc7b5ce3b19e20201bcc8f71614227927; PHPSESSID=mvnf3crdcurvlocujcknj0vud1'
+  }
+};
+request(options, function (error, rp) {
+  if (error) throw new Error(error);
+ var response = {"data":`Simsimi đã tiếp thu câu trả lời của bạn`,"author":"Mai Huy Bảo, Nguyễn Thế Nam, NH Tiến Lâm, Đặng Văn Hùng","contact":"https://www.facebook.com/JustOnly.MaiHuyBao.Unofficial, https://www.facebook.com/NNam13, https://www.facebook.com/tienlam.nh.9, https://www.facebook.com/hungchodz99","Homepage":"berver.tech"}
+   console.log('/sim/',req.params.text,rp.body.msg,req.ip);
+   res.end(JSON.stringify(response));});
+})
 var server = app.listen(app.get("port"), function () {
 
   var host = server.address().address
