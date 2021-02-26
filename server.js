@@ -13,13 +13,24 @@ var trai = JSON.parse(fs.readFileSync("./trai.json","utf-8"));
 app.set("port", process.env.PORT || 4000);
 var author = "TEAM AUTHOR: \nMai Huy Bảo, \nNguyễn Thế Nam, \nNH Tiến Lâm, \nMinh Mẫn, \nĐặng Văn Hùng"
 var contact = "CONTACT AT:\nhttps://www.facebook.com/JustOnly.MaiHuyBao.Unofficial\nhttps://www.facebook.com/NNam13\nhttps://www.facebook.com/tienlam.nh.9\nhttps://www.facebook.com/MinhMan.4\nhttps://www.facebook.com/hungchodz99"
-app.get('/', function (req, res) {
-   res.writeHead(200, {'Content-Type': 'application/json'});
-   var response = `LIST API:\n• https://api.berver.tech/meme\nAPI meme việt\n• https://api.berver.tech/cosplay\nAPI ảnh cosplay\n• https://api.berver.tech/lyrics/title/artist\nAPI lời bài hát\n• https://api.berver.tech/cadao\nAPI ca dao\n• https://api.berver.tech/avatar/id=\nAPI lấy avatar Facebook không cần token\n• https://api.berver.tech/duckbo\nAPI ảnh Trần Đức Bo\n• https://api.berver.tech/jimmy\nAPI ảnh Jimmy Nguyễn\n• https://api.berver.tech/sim/[text]\nAPI simsimi Tiếng Việt\n• https://api.berver.tech/simteach/[hoi]/[dap]\nAPI dạy simsimi nói\n• https://api.berver.tech/gai\nAPI ảnh gái\n• https://api.berver.tech/trai\nAPI ảnh trai\n\n\n${author}\n\n\n${contact}`
-   console.log('/',req.ip);
-   res.end(response);
-})
+// app.get('/', function (req, res) {
+//    res.writeHead(200, {'Content-Type': 'application/json'});
+//    var response = `LIST API:\n• https://api.berver.tech/meme\nAPI meme việt\n• https://api.berver.tech/cosplay\nAPI ảnh cosplay\n• https://api.berver.tech/lyrics/title/artist\nAPI lời bài hát\n• https://api.berver.tech/cadao\nAPI ca dao\n• https://api.berver.tech/avatar/id=\nAPI lấy avatar Facebook không cần token\n• https://api.berver.tech/duckbo\nAPI ảnh Trần Đức Bo\n• https://api.berver.tech/jimmy\nAPI ảnh Jimmy Nguyễn\n• https://api.berver.tech/sim/[text]\nAPI simsimi Tiếng Việt\n• https://api.berver.tech/simteach/[hoi]/[dap]\nAPI dạy simsimi nói\n• https://api.berver.tech/gai\nAPI ảnh gái\n• https://api.berver.tech/trai\nAPI ảnh trai\n\n\n${author}\n\n\n${contact}`
+//    console.log('/',req.ip);
+//    res.end(response);
+// })
+var path = require('path');
 
+// viewed at http://localhost:8080
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname + '/index.html'));
+});
+app.get('/style.css', function(req, res) {
+  res.sendFile(__dirname + "/style.css");
+});
+app.get('/script.js', function(req, res) {
+  res.sendFile(__dirname + "/script.js");
+});
 app.get('/cadao', async function (req, res) {
   var lenght = Number(cadao.lenght);
   var random = await Math.floor(Math.random() * lenght) + 1
