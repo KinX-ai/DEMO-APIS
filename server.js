@@ -74,7 +74,7 @@ app.get('/jimmy', async function (req, res) {
    console.log('/jimmy',req.ip)
    res.end(JSON.stringify(response));
 })
-app.get('/lyrics/:title/:artist', async function (req, res) {
+app.get("/lyrics/?title=:title&artist=:artist", async function (req, res) {
 const lyricsFinder = require('lyrics-finder');
     let lyrics = await lyricsFinder(req.params.artist, req.params.title) || "Not Found!";
    res.writeHead(200, {'Content-Type': 'application/json'});
@@ -114,7 +114,7 @@ var options = {
 request(options, function (error, rp) {
   if (error) throw new Error(error);
  var response = {"data":`${JSON.parse(rp.body).msg}`,"author":"Mai Huy Bảo, Nguyễn Thế Nam, NH Tiến Lâm, Đặng Văn Hùng, Minh Mẫn","contact":"https://www.facebook.com/JustOnly.MaiHuyBao.Unofficial, https://www.facebook.com/NNam13, https://www.facebook.com/tienlam.nh.9, https://www.facebook.com/hungchodz99, https://www.facebook.com/MinhMan.4","Homepage":"berver.tech"}
-   console.log('/sim/',req.params.text,rp.body.msg,req.ip);
+   console.log('/sim/',req.params.text,'=>',JSON.parse(rp.body).msg,req.ip);
    res.end(JSON.stringify(response));});
 })
 app.get('/simteach/:hoi/:dap', function (req, res) {
